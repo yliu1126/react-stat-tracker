@@ -9,10 +9,14 @@ function App() {
   const [showStatSheet, setShowStatSheet] = useState(true);
   const [stats, setStats] = useState(data)
 
+  const recordStat = (stat) => {
+    console.log(stat)
+  }
+
   return (
     <div className="container">
       <Header onShow={() => setShowStatSheet(!showStatSheet)} showStat={showStatSheet}/>
-      <AddStats/>
+      <AddStats onRecord={recordStat}/>
       {showStatSheet && <StatSheet stats={stats}/>}
     </div>
   );
