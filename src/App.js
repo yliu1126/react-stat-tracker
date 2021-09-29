@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import AddStats from './components/AddStats';
+import Header from './components/Header'
+import StatSheet from './components/StatSheet';
+import { useState } from 'react';
+import data from "/Users/yuxiaoliu/Desktop/work/react-stat-tracker/src/stat.json"
+
 
 function App() {
+  const [showStatSheet, setShowStatSheet] = useState(true);
+  const [stats, setStats] = useState(data)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header onShow={() => setShowStatSheet(!showStatSheet)} showStat={showStatSheet}/>
+      <AddStats/>
+      {showStatSheet && <StatSheet stats={stats}/>}
     </div>
   );
 }
