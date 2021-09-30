@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
-const AddStats = ({ onRecord, setIsSubmitted }) => {
+const AddStats = ({ onRecord, setIsSubmitted, revertStat, setIsReverted, deleteStat, setIsDeleted }) => {
     const [text, setText] = useState('')
     const [type, setType] = useState('')
+    const [prevText, setPrevText] = useState('')
+    const [prevType, setPrevType] = useState('')
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -14,7 +16,34 @@ const AddStats = ({ onRecord, setIsSubmitted }) => {
 
         onRecord({ text, type })
         setText('')
+        setType('')
         setIsSubmitted(true)
+        setPrevText(text)
+        setPrevType(type)
+    }
+
+    const onRevert = (e) => {
+        e.preventDefault()
+        if(!prevText) {
+            alert('No previous stat')
+            return
+        }
+        revertStat({ prevText, prevType })
+        setIsReverted(true)
+        setPrevText('')
+        setPrevType('')
+    }
+
+    const onDelete = (e) => {
+        e.preventDefault()
+        if(!text) {
+            alert('No stat to delete')
+            return
+        }
+        deleteStat({ text, type })
+        setIsDeleted(true)
+        setText('')
+        setType('')
     }
 
     const handleKeyPress = (e) => {
@@ -25,7 +54,10 @@ const AddStats = ({ onRecord, setIsSubmitted }) => {
     
     const twoCalls = e =>{
     setText(e.target.value)
-    setIsSubmitted(false)}
+    setIsSubmitted(false)
+    setIsReverted(false)
+    setIsDeleted(false)
+    }
 
     return (
         <form className="add-form" onSubmit={onSubmit} onKeyDown={handleKeyPress}>
@@ -52,7 +84,11 @@ const AddStats = ({ onRecord, setIsSubmitted }) => {
                 <div className="stat-cell"><input id="attemptedFT" className="stat-btn" type="button" value="Attempt FT" onClick={(e) => setType(e.target.id)}/></div>
                 <div className="stat-cell"><input id="df" className="stat-btn" type="button" value="DF" onClick={(e) => setType(e.target.id)}/></div>
             </div>
-            <input id="submit" type="submit" value='record' className='btn  btn-block'/>
+            <div className="func-btns">
+                <input id="submit" type="submit" value='record' className='btn  btn-block'/>
+                <input id="revert" type="button" value='revert' className='btn  btn-block' onClick={onRevert}/>
+                <input id="delete" type="button" value='delete' className='btn  btn-block' onClick={onDelete}/>
+            </div>
             </form>
     )
 }

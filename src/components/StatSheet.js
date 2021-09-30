@@ -33,7 +33,7 @@ const StatSheet = ({ stats }) => {
         <tbody>
             {stats.map((stat) => (
                 <><tr>
-                    <td>{stat.name}</td>
+                    <td>#{stat.number} {stat.name}</td>
                     <td>{stat.or}</td>
                     <td>{stat.dr}</td>
                     <td>{stat.reb}</td>

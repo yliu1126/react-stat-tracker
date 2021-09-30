@@ -79,6 +79,13 @@ body {
   grid-gap: 0.5rem;
 }
 
+.func-btns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-gap: 0.5rem;
+}
+
 .table-wrapper {
   font-size: 50%;
   max-width: 700px;
