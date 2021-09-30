@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
-const AddStats = ({ onRecord }) => {
+const AddStats = ({ onRecord, setIsSubmitted }) => {
     const [text, setText] = useState('')
     const [type, setType] = useState('')
 
@@ -14,35 +14,46 @@ const AddStats = ({ onRecord }) => {
 
         onRecord({ text, type })
         setText('')
+        setIsSubmitted(true)
     }
+
+    // handleKeyPress = (e) => {
+    //     if (e.keyCode === 13) {
+    //         onSubmit();
+    //     }
+    // }
+    
+    const twoCalls = e =>{
+    setText(e.target.value)
+    setIsSubmitted(false)}
 
     return (
         <form className="add-form" onSubmit={onSubmit}>
             <div className="form-control">
                 <label>Player Name</label>
-                <input type="text" placeholder="Name" value={text} onChange={(e) => setText(e.target.value)}/>
+                <input id="text" type="text" placeholder="Name" value={text} onChange={twoCalls}/>
             </div>
             <div><label>Stat Type</label></div>
             <div className="form-control stat">
-                <div className="stat-cell"><input id="or" className="btn" type="button" value="OR" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="dr" className="btn" type="button" value="DR" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="ast" className="btn" type="button" value="AST" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="to" className="btn" type="button" value="TO" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="fifty" className="btn" type="button" value="50/50" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="defl" className="btn" type="button" value="Defl" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="stl" className="btn" type="button" value="STL" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="blk" className="btn" type="button" value="BLK" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="madeTwo" className="btn" type="button" value="Made 2" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="madeThree" className="btn" type="button" value="Made 3" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="madeFT" className="btn" type="button" value="Made FT" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="pf" className="btn" type="button" value="PF" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="missTwo" className="btn" type="button" value="Miss 2" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="missThree" className="btn" type="button" value="Miss 3" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="missFT" className="btn" type="button" value="Miss FT" onClick={(e) => setType(e.target.id)}/></div>
-                <div className="stat-cell"><input id="df" className="btn" type="button" value="DF" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="or" className="stat-btn" type="button" value="OR" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="dr" className="stat-btn" type="button" value="DR" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="ast" className="stat-btn" type="button" value="AST" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="to" className="stat-btn" type="button" value="TO" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="fifty" className="stat-btn" type="button" value="50/50" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="defl" className="stat-btn" type="button" value="Defl" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="stl" className="stat-btn" type="button" value="STL" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="blk" className="stat-btn" type="button" value="BLK" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="madeTwo" className="stat-btn" type="button" value="Made 2" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="madeThree" className="stat-btn" type="button" value="Made 3" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="madeFT" className="stat-btn" type="button" value="Made FT" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="pf" className="stat-btn" type="button" value="PF" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="attemptedTwo" className="stat-btn" type="button" value="Attempt 2" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="attemptedThree" className="stat-btn" type="button" value="Attempt 3" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="attemptedFT" className="stat-btn" type="button" value="Attempt FT" onClick={(e) => setType(e.target.id)}/></div>
+                <div className="stat-cell"><input id="df" className="stat-btn" type="button" value="DF" onClick={(e) => setType(e.target.id)}/></div>
             </div>
-            <input type="submit" value='record' className='btn btn-block'/>
-        </form>
+            <input id="submit" type="submit" value='record' className='btn  btn-block'/>
+            </form>
     )
 }
 
