@@ -17,20 +17,20 @@ const AddStats = ({ onRecord, setIsSubmitted }) => {
         setIsSubmitted(true)
     }
 
-    // handleKeyPress = (e) => {
-    //     if (e.keyCode === 13) {
-    //         onSubmit();
-    //     }
-    // }
+    const handleKeyPress = (e) => {
+        if (e.keyCode === 13) {
+            onSubmit(e)
+        }
+    }
     
     const twoCalls = e =>{
     setText(e.target.value)
     setIsSubmitted(false)}
 
     return (
-        <form className="add-form" onSubmit={onSubmit}>
+        <form className="add-form" onSubmit={onSubmit} onKeyDown={handleKeyPress}>
             <div className="form-control">
-                <label>Player Name</label>
+                <label>Player Name/Initials/Number</label>
                 <input id="text" type="text" placeholder="Name" value={text} onChange={twoCalls}/>
             </div>
             <div><label>Stat Type</label></div>
