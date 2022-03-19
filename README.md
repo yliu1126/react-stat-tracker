@@ -1,6 +1,6 @@
 # Brief Intro
-This page is built with React and can be used for recording stats for the GT Men's Basketball Team.
-When recording stat, the user can input player's full name, player's initial, or player's number. 
+This page is built with React and can be used for recording stats for the GT Men's Basketball Team.\
+When recording stat, the user can input player's full name, player's initial, or player's number. \
 Link: https://yliu1126.github.io/react-stat-tracker/
 
 # Getting Started with Create React App
