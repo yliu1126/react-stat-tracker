@@ -1,3 +1,6 @@
+# Link for the website
+https://yliu1126.github.io/react-stat-tracker/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
