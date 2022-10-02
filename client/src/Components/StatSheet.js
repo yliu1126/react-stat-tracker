@@ -3,7 +3,7 @@ const StatSheet = ({ stats }) => {
   useScript("https://www.kryogenix.org/code/browser/sorttable/sorttable.js");
   return (
     <div className="table-wrapper">
-      <table class="sortable">
+      <table className="sortable">
         <thead>
           <tr>
             <th>Name</th>

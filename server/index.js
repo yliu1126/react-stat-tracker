@@ -22,6 +22,31 @@ app.get("/getStats", (req, res) => {
   });
 });
 
+app.get(
+  "/getStats/date/:year(\\d{4})-:month(\\d{2})-:day(\\d{2})",
+  (req, res) => {
+    let queryDate = new Date(
+      +req.params.year,
+      +req.params.month - 1,
+      +req.params.day
+    );
+    queryDate.setHours(-4);
+    console.log(queryDate);
+    StatsModel.find(
+      {
+        date: { $eq: new Date(queryDate) },
+      },
+      (err, result) => {
+        if (err) {
+          res.json(err);
+        } else {
+          res.json(result);
+        }
+      }
+    );
+  }
+);
+
 app.post("/createStats", async (req, res) => {
   const stat = req.body;
   const newStat = new StatsModel(stat);

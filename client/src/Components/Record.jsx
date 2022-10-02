@@ -3,6 +3,8 @@ import Header from './Header'
 import StatSheet from './StatSheet';
 import { useState } from 'react';
 import data from "../stat.json"
+import Axios from "axios";
+
 
 
 //Add Total Row
@@ -13,11 +15,12 @@ function Record() {
   const [isReverted, setIsReverted] = useState(false)
   const [isDeleted, setIsDeleted] = useState(false)
   const [stats, setStats] = useState(data)
+  const [date, setDate] = useState("");
 
   const recordStat = (stat) => {
     data.forEach(obj => {
       if(stat.text === obj.name || stat.text === obj.number || stat.text === obj.initial) {
-        console.log(obj)
+        //console.log(obj)
         for (var key in obj) {
           if (stat.type === key) {
             if (stat.type === "or" || stat.type === "dr") {
@@ -121,12 +124,31 @@ function Record() {
     })
   }
 
+  const print = () => {
+   
+  }
+
+  const createStat = () => {
+    Axios.post("http://localhost:3001/createStats", {
+      date,
+      stats,
+    }).then((response) => {
+      console.log(response);
+      console.log(stats)
+      alert("stat created");
+    });
+  };
+
 
   return (
     <div className="container">
       <Header onShow={() => setShowStatSheet(!showStatSheet)} showStat={showStatSheet}/>
       <AddStats onRecord={recordStat} isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} revertStat={revertStat} setIsReverted={setIsReverted} deleteStat={deleteStat} setIsDeleted={setIsDeleted}/>
       {showStatSheet && <StatSheet stats={stats}/>}
+      <input type="date" placeholder="Date..." onChange={(event) => {
+            setDate(event.target.value);
+          }}/>
+      <button onClick={createStat}>Save Stats</button>
     </div>
   );
 }

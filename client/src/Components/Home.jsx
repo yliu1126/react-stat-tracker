@@ -1,8 +1,14 @@
 import React from 'react'
+import mbbimage from '../gt-logo.jpeg'
 
 function Home() {
   return (
-    <div>Home</div>
+    <div>
+      <div className="image">
+        <img src={mbbimage} alt="logo" />
+      </div>
+    </div>
+  
   )
 }
 
